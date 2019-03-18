@@ -12,7 +12,7 @@ import {
   Fab,
   IconButton
 } from "@material-ui/core";
-import { AccountCircle, Add, Delete } from "@material-ui/icons";
+import { AccountCircle, Add, Delete, ListAlt } from "@material-ui/icons";
 import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
@@ -53,29 +53,44 @@ const List = ({ history, classes }) => {
   return (
     <div className={classes.root}>
       <ListMain component="nav">
-        {list.map(item => (
-          <ListItem key={item._id} button divider>
-            <ListItemIcon
-              style={{ marginRight: 0 }}
-              onClick={() => openContact(item._id)}
-            >
-              <AccountCircle />
-            </ListItemIcon>
-            <ListItemText
-              primary={item.name}
-              onClick={() => openContact(item._id)}
-            />
-            <ListItemIcon style={{ marginRight: 0 }}>
-              <IconButton
-                className={classes.deleteButton}
-                aria-label="Delete"
-                onClick={() => deleteContact(item._id)}
+        {!!list.length &&
+          list.map(item => (
+            <ListItem key={item._id} button divider>
+              <ListItemIcon
+                style={{ marginRight: 0 }}
+                onClick={() => openContact(item._id)}
               >
-                <Delete />
-              </IconButton>
-            </ListItemIcon>
-          </ListItem>
-        ))}
+                <AccountCircle />
+              </ListItemIcon>
+              <ListItemText
+                primary={item.name}
+                onClick={() => openContact(item._id)}
+              />
+              <ListItemIcon style={{ marginRight: 0 }}>
+                <IconButton
+                  className={classes.deleteButton}
+                  aria-label="Delete"
+                  onClick={() => deleteContact(item._id)}
+                >
+                  <Delete />
+                </IconButton>
+              </ListItemIcon>
+            </ListItem>
+          ))}
+        {!list.length && (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              color: "lightgrey"
+            }}
+          >
+            <ListAlt style={{ fontSize: 200 }} />
+            There are no contacts
+          </div>
+        )}
       </ListMain>
       <Fab
         color="primary"
