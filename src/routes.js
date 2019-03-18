@@ -37,9 +37,9 @@ const Routes = () => (
       <Route exact path="/register" component={() => <Signup />} />
       <PrivateRoute exact path="/contacts" component={List} />
       <PrivateRoute exact path="/contacts/add" component={Add} />
-      <PrivateRoute exact path="/contacts/remove" component={Remove} />
       <PrivateRoute exact path="/contacts/:id" component={Details} />
       <PrivateRoute exact path="/contacts/:id/update" component={Update} />
+      <PrivateRoute exact path="/contacts/:id/delete" component={Remove} />
       <Route path="*" component={() => <h1>Page not found!</h1>} />
     </Switch>
   </BrowserRouter>
