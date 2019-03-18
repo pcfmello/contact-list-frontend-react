@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-
-import { withFormik, FieldArray, Formik } from "formik";
+import { withFormik, FieldArray } from "formik";
 import * as Yup from "yup";
+
+import { CPFMask, PhoneMask } from "../MaskInput";
 
 import { AddCircleOutline, RemoveCircleOutline } from "@material-ui/icons";
 import {
@@ -86,6 +87,9 @@ const ContactForm = ({
           required
           autoFocus
           error={errors.name && touched.name}
+          InputLabelProps={{
+            shrink: true
+          }}
         />
         {errors.name && touched.name && (
           <FormHelperText>{errors.name}</FormHelperText>
@@ -104,6 +108,12 @@ const ContactForm = ({
           onChange={handleChange}
           required
           error={errors.cpf && touched.cpf}
+          InputLabelProps={{
+            shrink: true
+          }}
+          InputProps={{
+            inputComponent: CPFMask
+          }}
         />
         {errors.cpf && touched.cpf && (
           <FormHelperText>{errors.cpf}</FormHelperText>
@@ -132,6 +142,12 @@ const ContactForm = ({
                       fullWidth
                       onChange={handleChange}
                       value={values.phoneNumbers[index].number}
+                      InputLabelProps={{
+                        shrink: true
+                      }}
+                      InputProps={{
+                        inputComponent: PhoneMask
+                      }}
                     />
                     {values.phoneNumbers[index].number &&
                       index === values.phoneNumbers.length - 1 && (
