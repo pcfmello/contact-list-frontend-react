@@ -113,7 +113,7 @@ const ContactForm = ({
       <FieldArray
         name="phoneNumbers"
         render={arrayHelpers => (
-          <div>
+          <div className={classes.phoneNumbers}>
             {values.phoneNumbers &&
               values.phoneNumbers.length &&
               values.phoneNumbers.map((number, index) => (
@@ -182,6 +182,7 @@ const ContactFormSchema = () =>
   });
 
 const SignFormik = withFormik({
+  enableReinitialize: true,
   mapPropsToValues: () => ({
     _id: contact._id || "",
     name: contact.name || "",

@@ -2,13 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  IconButton
-} from "@material-ui/core";
+import { AppBar, Toolbar, Typography, IconButton } from "@material-ui/core";
 import { ListAlt, ArrowBackIos, Close } from "@material-ui/icons";
 import { withStyles } from "@material-ui/core/styles";
 
@@ -31,7 +25,8 @@ const styles = {
   },
   body: {
     marginTop: 56,
-    width: "100%"
+    width: "100%",
+    marginBottom: 56
   }
 };
 
