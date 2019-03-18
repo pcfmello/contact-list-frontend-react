@@ -9,9 +9,10 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Fab
+  Fab,
+  IconButton
 } from "@material-ui/core";
-import { AccountCircle, Add } from "@material-ui/icons";
+import { AccountCircle, Add, Delete } from "@material-ui/icons";
 import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
@@ -24,6 +25,9 @@ const styles = theme => ({
     position: "fixed",
     bottom: 0,
     right: 0
+  },
+  deleteButton: {
+    color: "red"
   }
 });
 
@@ -44,21 +48,32 @@ const List = ({ history, classes }) => {
   };
 
   const openContact = id => history.push(`/contacts/${id}`);
+  const deleteContact = id => history.push(`/contacts/${id}/delete`);
 
   return (
     <div className={classes.root}>
       <ListMain component="nav">
         {list.map(item => (
-          <ListItem
-            key={item._id}
-            button
-            divider
-            onClick={() => openContact(item._id)}
-          >
-            <ListItemIcon style={{ marginRight: 0 }}>
+          <ListItem key={item._id} button divider>
+            <ListItemIcon
+              style={{ marginRight: 0 }}
+              onClick={() => openContact(item._id)}
+            >
               <AccountCircle />
             </ListItemIcon>
-            <ListItemText primary={item.name} />
+            <ListItemText
+              primary={item.name}
+              onClick={() => openContact(item._id)}
+            />
+            <ListItemIcon style={{ marginRight: 0 }}>
+              <IconButton
+                className={classes.deleteButton}
+                aria-label="Delete"
+                onClick={() => deleteContact(item._id)}
+              >
+                <Delete />
+              </IconButton>
+            </ListItemIcon>
           </ListItem>
         ))}
       </ListMain>
