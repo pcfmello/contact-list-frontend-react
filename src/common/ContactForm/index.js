@@ -1,19 +1,17 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-import { withFormik, FieldArray } from "formik";
+import { withFormik } from "formik";
 import * as Yup from "yup";
 
 import { CPFMask, PhoneMask } from "../MaskInput";
 
-import { AddCircleOutline, RemoveCircleOutline } from "@material-ui/icons";
 import {
   FormControl,
   FormHelperText,
   TextField,
   Typography,
-  Fab,
-  IconButton
+  Fab
 } from "@material-ui/core";
 import { Check } from "@material-ui/icons";
 import { withStyles } from "@material-ui/core/styles";
@@ -120,61 +118,30 @@ const ContactForm = ({
         )}
       </FormControl>
 
-      <FieldArray
-        name="phoneNumbers"
-        render={arrayHelpers => (
-          <div className={classes.phoneNumbers}>
-            {values.phoneNumbers &&
-              values.phoneNumbers.length &&
-              values.phoneNumbers.map((number, index) => (
-                <div key={index}>
-                  <FormControl
-                    className={classes.formControl}
-                    error={errors.cpf && touched.cpf}
-                    fullWidth
-                  >
-                    <TextField
-                      name={`phoneNumbers[${index}].number`}
-                      className={classes.textField}
-                      label={`${index === 0 ? "Main" : ""} Phone ${
-                        index > 0 ? index + 1 : ""
-                      }`}
-                      fullWidth
-                      onChange={handleChange}
-                      value={values.phoneNumbers[index].number}
-                      InputLabelProps={{
-                        shrink: true
-                      }}
-                      InputProps={{
-                        inputComponent: PhoneMask
-                      }}
-                    />
-                    {values.phoneNumbers[index].number &&
-                      index === values.phoneNumbers.length - 1 && (
-                        <IconButton
-                          style={{
-                            position: "absolute",
-                            right: index === 0 ? 0 : 30
-                          }}
-                          onClick={() => arrayHelpers.push({ number: "" })}
-                        >
-                          <AddCircleOutline />
-                        </IconButton>
-                      )}
-                    {index !== 0 && values.phoneNumbers.length > 1 && (
-                      <IconButton
-                        style={{ position: "absolute", right: 0 }}
-                        onClick={() => arrayHelpers.remove(index)}
-                      >
-                        <RemoveCircleOutline />
-                      </IconButton>
-                    )}
-                  </FormControl>
-                </div>
-              ))}
-          </div>
+      <FormControl
+        className={classes.formControl}
+        error={errors.phone && touched.phone}
+        fullWidth
+      >
+        <TextField
+          id="phone"
+          className={classes.textField}
+          label="Phone"
+          value={values.phone}
+          onChange={handleChange}
+          required
+          error={errors.phone && touched.phone}
+          InputLabelProps={{
+            shrink: true
+          }}
+          InputProps={{
+            inputComponent: PhoneMask
+          }}
+        />
+        {errors.phone && touched.phone && (
+          <FormHelperText>{errors.phone}</FormHelperText>
         )}
-      />
+      </FormControl>
       {errors.apiErrors && (
         <Typography style={{ color: "#f44336", fontSize: 12 }}>
           {errors.apiErrors}
@@ -194,13 +161,7 @@ const ContactFormSchema = () =>
       .max(30, "Full name must max 30 characters")
       .required("Name is required"),
     cpf: Yup.string().required("CPF is required"),
-    phoneNumbers: Yup.array().of(
-      Yup.object()
-        .shape({
-          number: Yup.string().required("Number is required")
-        })
-        .required()
-    )
+    phone: Yup.string().required("Number is required")
   });
 
 const SignFormik = withFormik({
@@ -209,7 +170,7 @@ const SignFormik = withFormik({
     _id: contact._id || "",
     name: contact.name || "",
     cpf: contact.cpf || "",
-    phoneNumbers: contact.phoneNumbers || [{ number: "" }]
+    phone: contact.phone || ""
   }),
   validationSchema: ContactFormSchema,
 
@@ -219,13 +180,13 @@ const SignFormik = withFormik({
         await API.put(`/contacts/${values._id}`, {
           name: values.name,
           cpf: values.cpf,
-          phoneNumbers: values.phoneNumbers
+          phoneNumbers: [values.phone]
         });
       } else {
         await API.post(`/contacts`, {
           name: values.name,
           cpf: values.cpf,
-          phoneNumbers: values.phoneNumbers
+          phoneNumbers: [values.phone]
         });
       }
       props.history.goBack();
