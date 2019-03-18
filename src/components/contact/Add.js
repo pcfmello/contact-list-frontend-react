@@ -1,5 +1,10 @@
 import React from "react";
+import ContactForm from "../../common/ContactForm";
 
-const Add = () => <h1>Add</h1>;
+const Add = () => (
+  <div style={{ padding: 24 }}>
+    <ContactForm />
+  </div>
+);
 
 export default Add;
