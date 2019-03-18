@@ -194,7 +194,13 @@ const ContactFormSchema = () =>
       .max(30, "Full name must max 30 characters")
       .required("Name is required"),
     cpf: Yup.string().required("CPF is required"),
-    phoneNumbers: Yup.string()
+    phoneNumbers: Yup.array().of(
+      Yup.object()
+        .shape({
+          number: Yup.string().required("Number is required")
+        })
+        .required()
+    )
   });
 
 const SignFormik = withFormik({
