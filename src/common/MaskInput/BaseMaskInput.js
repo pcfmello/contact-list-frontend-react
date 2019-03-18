@@ -10,6 +10,7 @@ const BaseMaskInput = ({ inputRef, mask, ...rest }) => (
     }}
     {...{ mask }}
     placeholderChar={"\u2000"}
+    guide={false}
   />
 );
 
