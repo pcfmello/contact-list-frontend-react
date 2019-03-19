@@ -28,6 +28,17 @@ const styles = theme => ({
   },
   deleteButton: {
     color: "red"
+  },
+  itemIcon: { marginRight: 0 },
+  noContactsMessage: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    color: "lightgrey"
+  },
+  noContactsIcon: {
+    fontSize: "200px"
   }
 });
 
@@ -57,7 +68,7 @@ const List = ({ history, classes }) => {
           list.map(item => (
             <ListItem key={item._id} button divider>
               <ListItemIcon
-                style={{ marginRight: 0 }}
+                className={classes.itemIcon}
                 onClick={() => openContact(item._id)}
               >
                 <AccountCircle />
@@ -66,7 +77,7 @@ const List = ({ history, classes }) => {
                 primary={item.name}
                 onClick={() => openContact(item._id)}
               />
-              <ListItemIcon style={{ marginRight: 0 }}>
+              <ListItemIcon className={classes.itemIcon}>
                 <IconButton
                   className={classes.deleteButton}
                   aria-label="Delete"
@@ -78,16 +89,8 @@ const List = ({ history, classes }) => {
             </ListItem>
           ))}
         {!list.length && (
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              color: "lightgrey"
-            }}
-          >
-            <ListAlt style={{ fontSize: 200 }} />
+          <div className={classes.noContactsMessage}>
+            <ListAlt className={classes.noContactsIcon} />
             There are no contacts
           </div>
         )}

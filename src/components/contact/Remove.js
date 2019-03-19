@@ -8,7 +8,15 @@ import { withStyles } from "@material-ui/core/styles";
 
 import API from "../../api";
 
-const styles = theme => ({});
+const styles = {
+  showDataValue: {
+    fontSize: "1.5em"
+  },
+  deleteMessage: {
+    textAlign: "center",
+    marginBottom: 36
+  }
+};
 
 const Remove = ({ history, match, classes }) => {
   const [contact, setContact] = useState({});
@@ -40,15 +48,23 @@ const Remove = ({ history, match, classes }) => {
   const showData = (label, data) => (
     <div>
       <Typography variant="button">{label}</Typography>
-      <Typography variant="body1" gutterBottom>
+      <Typography
+        variant="body1"
+        gutterBottom
+        className={classes.showDataValue}
+      >
         {data}
       </Typography>
     </div>
   );
 
   return (
-    <div style={{ padding: 24 }}>
-      <Typography>Are you sure you want to delete this contact?</Typography>
+    <div class="content">
+      <div className={classes.deleteMessage}>
+        <Typography variant="body1" className={classes.showDataValue}>
+          Are you sure you want to delete this contact?
+        </Typography>
+      </div>
       {showData("Name", contact.name)}
       {showData("CPF", contact.cpf)}
       <Button

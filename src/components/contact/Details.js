@@ -14,7 +14,11 @@ const styles = theme => ({
     position: "absolute",
     bottom: 0,
     right: 0
-  }
+  },
+  showDataValue: {
+    fontSize: "1.5em"
+  },
+  phone: { display: "block" }
 });
 
 const Details = ({ match, history, classes }) => {
@@ -37,7 +41,11 @@ const Details = ({ match, history, classes }) => {
   const showData = (label, data) => (
     <div>
       <Typography variant="button">{label}</Typography>
-      <Typography variant="body1" gutterBottom>
+      <Typography
+        variant="body1"
+        gutterBottom
+        className={classes.showDataValue}
+      >
         {data}
       </Typography>
     </div>
@@ -45,13 +53,13 @@ const Details = ({ match, history, classes }) => {
 
   const showPhoneNumbers = list =>
     list.map(phone => (
-      <span key={phone._id} style={{ display: "block" }}>
+      <span key={phone._id} className={classes.phone}>
         {phone.number}
       </span>
     ));
 
   return (
-    <div style={{ padding: 24 }}>
+    <div className="content">
       {showData("Name", contact.name)}
       {showData("CPF", contact.cpf)}
       {Boolean(contact.phoneNumbers && contact.phoneNumbers.length) &&

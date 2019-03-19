@@ -138,9 +138,7 @@ const SignForm = ({
       )}
 
       {errors.apiErrors && (
-        <Typography style={{ color: "#f44336", fontSize: 12 }}>
-          {errors.apiErrors}
-        </Typography>
+        <Typography className="apiErrors">{errors.apiErrors}</Typography>
       )}
 
       <Button

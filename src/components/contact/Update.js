@@ -2,7 +2,7 @@ import React from "react";
 import ContactForm from "../../common/ContactForm";
 
 const Update = () => (
-  <div style={{ padding: 24 }}>
+  <div class="content">
     <ContactForm />
   </div>
 );

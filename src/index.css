@@ -19,3 +19,12 @@ body,
 #root > div {
   height: 100%;
 }
+
+.content {
+  padding: 24px;
+}
+
+.apierrors {
+  color: "#f44336";
+  font-size: 12px;
+}

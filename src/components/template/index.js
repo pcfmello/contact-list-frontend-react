@@ -27,6 +27,9 @@ const styles = {
     marginTop: 56,
     width: "100%",
     marginBottom: 56
+  },
+  appBar: {
+    position: "fixed"
   }
 };
 
@@ -38,7 +41,7 @@ const Template = ({ history, location, children, classes }) => {
 
   return (
     <React.Fragment>
-      <AppBar position="static" style={{ position: "fixed" }}>
+      <AppBar position="static" className={classes.appBar}>
         <Toolbar>
           <IconButton
             className={classes.menuButton}
