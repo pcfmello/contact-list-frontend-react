@@ -35,8 +35,12 @@ const styles = theme => ({
   formControl: {
     marginBottom: theme.spacing.unit
   },
-  sendButton: {
-    marginTop: 8
+  button: {
+    margin: "8px 0 0 0"
+  },
+  signupButton: {
+    backgroundColor: "#4caf50",
+    margin: "8px 0 0 0"
   }
 });
 
@@ -47,13 +51,14 @@ const SignForm = ({
   errors,
   handleChange,
   handleSubmit,
+  history,
   classes
 }) => (
   <Paper className={classes.paper}>
     <Typography variant="h6" gutterBottom>
       Sign {isSignUp ? "up" : "in"}
     </Typography>
-    <form onSubmit={handleSubmit} noValidate>
+    <form onSubmit={handleSubmit} autocomplete="off" noValidate>
       {isSignUp && (
         <FormControl
           className={classes.formControl}
@@ -69,6 +74,7 @@ const SignForm = ({
             required
             autoFocus
             error={errors.name && touched.name}
+            autoComplete="off"
           />
           {errors.name && touched.name && (
             <FormHelperText>{errors.name}</FormHelperText>
@@ -143,14 +149,39 @@ const SignForm = ({
 
       <Button
         type="submit"
-        className={classes.sendButton}
+        className={classes.button}
         variant="contained"
         size="large"
         color="primary"
         fullWidth
       >
-        Send
+        {isSignUp ? "Register" : "Sign in"}
       </Button>
+      {!isSignUp && (
+        <Button
+          type="button"
+          className={classes.signupButton}
+          variant="contained"
+          size="large"
+          color="primary"
+          onClick={() => history.push("/signup")}
+          fullWidth
+        >
+          Sign up
+        </Button>
+      )}
+      {isSignUp && (
+        <Button
+          type="button"
+          className={classes.button}
+          variant="contained"
+          size="large"
+          onClick={() => history.goBack()}
+          fullWidth
+        >
+          Back
+        </Button>
+      )}
     </form>
   </Paper>
 );
@@ -171,7 +202,7 @@ const SignFormSchema = props =>
       .min(6, "Password must min 6 characters"),
     passwordConfirm: props.isSignUp
       ? Yup.string()
-          .oneOf([Yup.ref("password"), null])
+          .oneOf([Yup.ref("password"), null], "Passwords must match")
           .required("Password confirm is required")
       : ""
   });
@@ -205,7 +236,8 @@ const SignFormik = withFormik({
 
 SignForm.propTypes = {
   isSignUp: PropTypes.bool,
-  classes: PropTypes.object
+  history: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(withRouter(SignFormik(SignForm)));
