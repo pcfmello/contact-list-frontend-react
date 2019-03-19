@@ -64,11 +64,15 @@ const ContactForm = ({ history, match, classes }) => {
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
-      .min(3, "Full name must min 3 characters")
-      .max(30, "Full name must max 30 characters")
+      .min(3, "Full name must have at least 3 characters")
+      .max(30, "Full name must have a maximun of 30characters")
       .required("Name is required"),
-    cpf: Yup.string().required("CPF is required"),
-    phone: Yup.string().required("Phone is required")
+    cpf: Yup.string()
+      .min(14, "CPF must have 11 numbers")
+      .required("CPF is required"),
+    phone: Yup.string()
+      .min(14, "Phone must have at least 8 numbers")
+      .required("Phone is required")
   });
 
   const onSubmit = async (values, { setFieldError, setSubmitting }) => {
@@ -105,7 +109,7 @@ const ContactForm = ({ history, match, classes }) => {
       enableReinitialize={true}
       render={({ values, touched, errors, handleChange, handleSubmit }) => {
         return (
-          <form noValidate onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} autocomplete="off" noValidate>
             <FormControl
               className={classes.formControl}
               error={errors.name && touched.name}
