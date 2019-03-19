@@ -15,6 +15,9 @@ const styles = {
   deleteMessage: {
     textAlign: "center",
     marginBottom: 36
+  },
+  showData: {
+    marginBottom: 36
   }
 };
 
@@ -65,8 +68,10 @@ const Remove = ({ history, match, classes }) => {
           Are you sure you want to delete this contact?
         </Typography>
       </div>
-      {showData("Name", contact.name)}
-      {showData("CPF", contact.cpf)}
+      <div className={classes.showData}>
+        {showData("Name", contact.name)}
+        {showData("CPF", contact.cpf)}
+      </div>
       <Button
         variant="contained"
         color="secondary"
