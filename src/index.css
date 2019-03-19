@@ -24,7 +24,7 @@ body,
   padding: 24px;
 }
 
-.apierrors {
-  color: "#f44336";
-  font-size: 12px;
+.apiErrors {
+  color: #f44336 !important;
+  font-size: 12px !important;
 }
