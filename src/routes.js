@@ -34,7 +34,7 @@ const Routes = () => (
       {/* Exact faz com que a rota seja exatamente a passada para o path.
         "/app" seria apenas /app e não /app/dashboard etc. */}
       <Route exact path="/" component={() => <Signin />} />
-      <Route exact path="/register" component={() => <Signup />} />
+      <Route exact path="/signup" component={() => <Signup />} />
       <PrivateRoute exact path="/contacts" component={List} />
       <PrivateRoute exact path="/contacts/add" component={Add} />
       <PrivateRoute exact path="/contacts/:id" component={Details} />
