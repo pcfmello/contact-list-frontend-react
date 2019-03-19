@@ -10,7 +10,7 @@ It has been developed usinig:
 ## Local Installation and Usage
 Install dependencies:
 
-`$ yarn install`
+`$ yarn`
 
 Start the server:
 
