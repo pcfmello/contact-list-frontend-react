@@ -8,7 +8,7 @@ import { withStyles } from "@material-ui/core/styles";
 
 import API from "../../api";
 
-const styles = {
+const styles = theme => ({
   showDataValue: {
     fontSize: "1.5em"
   },
@@ -18,8 +18,11 @@ const styles = {
   },
   showData: {
     marginBottom: 36
+  },
+  leftIcon: {
+    marginRight: theme.spacing.unit
   }
-};
+});
 
 const Remove = ({ history, match, classes }) => {
   const [contact, setContact] = useState({});
@@ -62,7 +65,7 @@ const Remove = ({ history, match, classes }) => {
   );
 
   return (
-    <div class="content">
+    <div className="content">
       <div className={classes.deleteMessage}>
         <Typography variant="body1" className={classes.showDataValue}>
           Are you sure you want to delete this contact?
@@ -79,8 +82,8 @@ const Remove = ({ history, match, classes }) => {
         fullWidth
         onClick={deleteContact}
       >
+        <Delete className={classes.leftIcon} />
         Delete
-        <Delete className={classes.rightIcon} />
       </Button>
     </div>
   );

@@ -58,7 +58,7 @@ const SignForm = ({
     <Typography variant="h6" gutterBottom>
       Sign {isSignUp ? "up" : "in"}
     </Typography>
-    <form onSubmit={handleSubmit} autocomplete="off" noValidate>
+    <form onSubmit={handleSubmit} noValidate>
       {isSignUp && (
         <FormControl
           className={classes.formControl}

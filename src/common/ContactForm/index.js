@@ -109,7 +109,7 @@ const ContactForm = ({ history, match, classes }) => {
       enableReinitialize={true}
       render={({ values, touched, errors, handleChange, handleSubmit }) => {
         return (
-          <form onSubmit={handleSubmit} autocomplete="off" noValidate>
+          <form onSubmit={handleSubmit} noValidate>
             <FormControl
               className={classes.formControl}
               error={errors.name && touched.name}
@@ -124,6 +124,7 @@ const ContactForm = ({ history, match, classes }) => {
                 onChange={handleChange}
                 required
                 autoFocus
+                autoComplete="off"
                 error={errors.name && touched.name}
                 InputLabelProps={{
                   shrink: true
@@ -146,6 +147,7 @@ const ContactForm = ({ history, match, classes }) => {
                 value={values.cpf}
                 onChange={handleChange}
                 required
+                autoComplete="off"
                 error={errors.cpf && touched.cpf}
                 InputLabelProps={{
                   shrink: true
@@ -172,6 +174,7 @@ const ContactForm = ({ history, match, classes }) => {
                 value={values.phone}
                 onChange={handleChange}
                 required
+                autoComplete="off"
                 error={errors.phone && touched.phone}
                 InputLabelProps={{
                   shrink: true
